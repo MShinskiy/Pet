@@ -5,7 +5,7 @@ public class Jar {
     private Deque<Integer> j;
     public static final int JAR_MAX_SIZE = 4;
 
-    //fill top to bottom
+    //Fill top to bottom
     public Jar(Integer... cols){
         j = new ArrayDeque<>();
 
@@ -13,6 +13,7 @@ public class Jar {
         j.addAll(List.of(cols));
     }
 
+    //Whether jar is full
     public boolean isFilled(){
         int count = 0;
         for (Integer next : this.getDeque())
@@ -22,11 +23,12 @@ public class Jar {
         return count == JAR_MAX_SIZE;
     }
 
+    //Whether jar is empty
     public boolean isEmpty(){
         return this.getDeque().isEmpty();
     }
 
-    //count number of different colours in the jar
+    //Count number of different colours in the jar
     public int countCols(){
         if(this.isEmpty())
             return 0;
@@ -41,7 +43,7 @@ public class Jar {
         return count;
     }
 
-    //pour from this jar to another jar
+    //Pour from this jar to another jar
     public boolean pour(Jar to){
         if(!canPour(to)) return false;
 
@@ -60,7 +62,7 @@ public class Jar {
         return true;
     }
 
-    //check if it is legal to pour from one jar to another
+    //Check if it is legal to pour from one jar to another
     public boolean canPour( Jar to){
         if(to.getDeque().size() == 0) return true;
 
@@ -92,6 +94,7 @@ public class Jar {
     }
 
     //support methods
+    //copy whole jar
     public Jar copy(){
         return new Jar(getCols());
     }
