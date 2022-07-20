@@ -8,7 +8,7 @@ public class Frame extends JFrame {
 
 
         //Default settings
-        setTitle("Сраные колбочки со сраной водой");
+        setTitle("колбочки");
         setVisible(true);
         //setResizable(false);
         setLocationRelativeTo(null);
