@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="WordBuilderApp:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/WordBuilderApp_jar</output-path>
+    <root id="archive" name="WordBuilderApp.jar">
+      <element id="module-output" name="WordBuilderApp" />
+    </root>
+  </artifact>
+</component>
