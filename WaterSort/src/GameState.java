@@ -1,16 +1,21 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * This class implement functionality to represent a game board
+ * at every step of the game
+ */
 public class GameState {
 
     private Jar[] jars;
     private int from, to;
 
-    //constructor
+    //Constructor
     public GameState(Jar[] jars){
         this.jars = jars;
     }
 
+    //Count how many jar are completely filled
     public int filledJars(){
         int count = 0;
         for (Jar j : this.jars)
@@ -19,6 +24,7 @@ public class GameState {
         return count;
     }
 
+    //Count how many jars are completely empty
     public int emptyJars(){
         int count = 0;
         for( Jar j : this.jars)
@@ -27,16 +33,14 @@ public class GameState {
         return count;
     }
 
-    //copy of current game state
+    //Copy of current game state
     public GameState copy(){
         Jar[] copy = new Jar[this.jars.length];
         for(int i = 0 ; i < this.jars.length; i++) copy[i] = this.jars[i].copy();
         return new GameState(copy);
     }
 
-
-
-    //whether is a goal state
+    //Whether is a goal state
     public boolean isGoal(){
         for (Jar j : this.jars)
             if(!(j.isEmpty() || j.isFilled())) return false;
@@ -44,7 +48,7 @@ public class GameState {
         return true;
     }
 
-    //whether jars config are the same
+    //Whether jars config are the same
     public boolean isSameBoard(GameState gs){
         for(int i = 0; i < this.jars.length; i++){
             Integer[] thisCols = this.jars[i].getCols();
@@ -60,10 +64,12 @@ public class GameState {
         return true;
     }
 
-    //count score of change of states (weight of edge)
+    //Count score of change of states (weight of edge)
     public int countCost(GameState currentGS){
         int count = 0;
-        count += currentGS.filledJars();
+        count += currentGS.filledJars()*10;
+
+        //Higher score for less unconnected colours
         for(int i  = 0; i < currentGS.jars.length; i++) {
             int countCols = currentGS.jars[i].countCols();
             count += countCols > 0 ? Jar.JAR_MAX_SIZE / countCols : Jar.JAR_MAX_SIZE;
@@ -72,7 +78,7 @@ public class GameState {
         return count;
     }
 
-    //find possible moves and store in GameState[from, to]
+    //find possible moves
     public ArrayList<GameState> possibleMoves(){
         ArrayList<GameState> moves = new ArrayList<>();
 
@@ -84,14 +90,14 @@ public class GameState {
                     copyGS.jars[i].pour(copyGS.jars[j]);
                     copyGS.setFrom(i+1);
                     copyGS.setTo(j+1);
+
                     if (!moves.contains(copyGS))
-                        moves.add(copyGS);
+                        moves.add(copyGS);          //add new possible move
                 }
             }
 
         return moves;
     }
-
 
     @Override
     public String toString(){

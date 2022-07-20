@@ -33,6 +33,7 @@ public class main {
             new Jar()
      */
 
+    //Initial board
     private static final Jar[] initialBoard = new Jar[] {
             new Jar(1, 11, 2, 2),
             new Jar(7, 8, 3, 9),
@@ -51,26 +52,26 @@ public class main {
     };
 
     public static void main(String[] args) throws FileNotFoundException {
-        long sTime = System.currentTimeMillis();
         //Collections.reverse(Arrays.asList(initialBoard));
 
+        long sTime = System.currentTimeMillis();            //time solution
         Solver problem = new Solver(initialBoard);
         File outFile = new File("output.txt");
         PrintWriter output = new PrintWriter(outFile);
         problem.solve(output);
+
         long eTime = System.currentTimeMillis();
         long time = eTime - sTime;
         long m = time/1000/60;
         long s = ((time/1000) - m*60) % 60;
         long ms = time - m*1000*60 - s*1000;
+
         System.out.println("Time taken: " +
                 m + "m " +
                 s + "s " +
                 ms + "ms "
         );
+
         output.close();
     }
-
-
-
 }

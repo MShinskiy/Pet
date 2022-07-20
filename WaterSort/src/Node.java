@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 
+/**
+ * This class implements node functionality to be represented in a tree
+ */
 public class Node {
 
     private GameState state;
     private Node parent;
     private Integer to, from;
-
-
-
     private int total, score, level;
 
     //Constructor for children nodes
@@ -32,12 +32,7 @@ public class Node {
         return null;
     }
 
-    public void updateToFrom(){
-        from = this.state.getFrom();
-        to = this.state.getTo();
-    }
-
-    //getters
+    //Getters
     public Integer getTo() {
         return to;
     }
@@ -66,7 +61,13 @@ public class Node {
         return parent;
     }
 
-    //support methods
+    //setter for two values
+    public void updateToFrom(){
+        from = this.state.getFrom();
+        to = this.state.getTo();
+    }
+
+    //Support methods
     @Override
     public String toString(){
         return "Node: " + state;
